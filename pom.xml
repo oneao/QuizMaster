@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.quizmaster</groupId>
+    <artifactId>QuizMaster</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--  项目描述  -->
+    <name>QuizMaster</name>
+    <url>?</url>
+    <description>刷题小程序</description>
+
+    <!--  子模块  -->
+    <modules>
+        <module>qm_admin</module>
+        <module>qm_framework</module>
+        <module>qm_common</module>
+        <module>qm_web</module>
+        <module>qm_app</module>
+    </modules>
+
+    <!--  版本信息  -->
+    <properties>
+        <quizmaster.version>1.0-SNAPSHOT</quizmaster.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.boot.version>3.2.6</spring.boot.version>
+        <spring.framework.version>6.1.8</spring.framework.version>
+        <druid.version>1.2.23</druid.version>
+        <mybatis.plus.version>3.5.7</mybatis.plus.version>
+        <knife4j.version>4.4.0</knife4j.version>
+        <hutool.version>5.8.26</hutool.version>
+        <sa.token.version>1.38.0</sa.token.version>
+        <fastjson2.version>2.0.43</fastjson2.version>
+        <dom4j.version>2.1.4</dom4j.version>
+    </properties>
+
+    <!--  依赖管理  -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot Dependencies：当使用该依赖时，Maven就会自动使用该pom中定义的依赖版本 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringFramework的依赖配置
+                    作用：在maven的pom.xml中无需指定具体的类库版本，直接使用，即默认使用bom中指定的版本。
+                    查询方式：https://docs.spring.io/spring-boot/docs/3.0.2/reference/html/getting-started.html#getting
+                        查询时切换版本号即可
+                    所有SpringBoot版本号：https://docs.spring.io/spring-boot/docs/
+                -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 阿里云druid数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- MyBatis-Plus 依赖，用于增强 MyBatis 的功能，提高开发效率 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!-- Knife4jInsight(简单、方便的OpenAPI接口文档私有化聚合平台) -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- hutool是一个小而全的Java工具类库，通过静态方法封装，降低相关API的学习成本，提高工作效率，使Java拥有函数式语言般的优雅，让Java语言也可以“甜甜的”。 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
+                <version>${sa.token.version}</version>
+            </dependency>
+
+            <!-- fastjson2 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <!-- dom4j -->
+            <dependency>
+                <groupId>org.dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
+            </dependency>
+
+            <!-- 核心模块 -->
+            <dependency>
+                <groupId>com.quizmaster</groupId>
+                <artifactId>qm_framework</artifactId>
+                <version>${quizmaster.version}</version>
+            </dependency>
+
+            <!-- 通用工具 -->
+            <dependency>
+                <groupId>com.quizmaster</groupId>
+                <artifactId>qm_common</artifactId>
+                <version>${quizmaster.version}</version>
+            </dependency>
+
+            <!-- web端 -->
+            <dependency>
+                <groupId>com.quizmaster</groupId>
+                <artifactId>qm_web</artifactId>
+                <version>${quizmaster.version}</version>
+            </dependency>
+
+            <!-- app端 -->
+            <dependency>
+                <groupId>com.quizmaster</groupId>
+                <artifactId>qm_app</artifactId>
+                <version>${quizmaster.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--  项目打包方式  -->
+    <packaging>pom</packaging>
+
+    <!--  构建插件  -->
+    <build>
+        <!-- 统一插件管理 -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <!-- 排除lombok依赖，该依赖只作用于编译阶段。 -->
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!--  Maven 仓库  -->
+    <repositories>
+        <!-- 在此处添加仓库配置 -->
+        <!--        <repository>-->
+        <!--        </repository>-->
+    </repositories>
+
+    <!--  Maven 插件仓库  -->
+    <pluginRepositories>
+        <!-- 在此处添加插件仓库配置 -->
+        <!--        <pluginRepository>-->
+        <!--        </pluginRepository>-->
+    </pluginRepositories>
+</project>
